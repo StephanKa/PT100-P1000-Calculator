@@ -61,12 +61,6 @@ namespace details {
         static inline constexpr float B_FACTOR = -0.0000005775F;
     };
 
-    namespace unit_literals {
-        constexpr auto operator""_Temp(long double value) { return Temperature{ static_cast<Temperature::Type>(value) }; }
-        constexpr auto operator""_Ohm(long double value) { return Ohm{ static_cast<Ohm::Type>(value) }; }
-        constexpr auto operator""_Volt(long double value) { return Volt{ static_cast<Volt::Type>(value) }; }
-    }// namespace unit_literals
-
     inline constexpr Temperature OFFSET{ 273.15F };
 
     constexpr float sqrtNewtonRaphson(float x, float curr, float prev)
@@ -86,6 +80,12 @@ namespace details {
     }
 }// namespace details
 
+namespace unit_literals {
+    constexpr auto operator""_Temp(long double value) { return Temperature{ static_cast<Temperature::Type>(value) }; }
+    constexpr auto operator""_Ohm(long double value) { return Ohm{ static_cast<Ohm::Type>(value) }; }
+    constexpr auto operator""_Volt(long double value) { return Volt{ static_cast<Volt::Type>(value) }; }
+}// namespace unit_literals
+
 struct PT100
 {
     static inline constexpr float R0 = 100.0F;
@@ -96,10 +96,10 @@ struct PT1000
     static inline constexpr float R0 = 1000.0F;
 };
 
-template<typename Type> constexpr auto calculate(float resistance)
+template<typename Type> constexpr auto calculate(Ohm resistance)
 {
     return (-1 * details::Constants::A_FACTOR * Type::R0
-             + details::sqrt(details::pow(details::Constants::A_FACTOR * Type::R0, 2) - 4 * details::Constants::B_FACTOR * Type::R0 * (Type::R0 - resistance)))
+             + details::sqrt(details::pow(details::Constants::A_FACTOR * Type::R0, 2) - 4 * details::Constants::B_FACTOR * Type::R0 * (Type::R0 - resistance())))
            / (2 * details::Constants::B_FACTOR * Type::R0);
 }
 }// namespace PTCalculator
