@@ -82,7 +82,7 @@ namespace details {
     {
         return x >= 0 && x < std::numeric_limits<float>::infinity()
                  ? sqrtNewtonRaphson(x, x, 0)
-                 : std::numeric_limits<double>::quiet_NaN();
+                 : std::numeric_limits<float>::quiet_NaN();
     }
 }// namespace details
 
