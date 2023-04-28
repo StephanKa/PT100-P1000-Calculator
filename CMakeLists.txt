@@ -8,7 +8,7 @@ SET(CMAKE_CXX_EXTENSIONS OFF)
 INCLUDE(cmake/Options.cmake)
 
 # Set the project name to your project name, my project isn't very descriptive
-PROJECT(myproject
+PROJECT(PT100-P1000-Calculator
         LANGUAGES CXX
         VERSION 0.0.1)
 
@@ -104,11 +104,6 @@ IF(ENABLE_TESTING)
     ENABLE_TESTING()
     MESSAGE("Building Tests. Be sure to check out test/constexpr_tests for constexpr testing")
     ADD_SUBDIRECTORY(test)
-ENDIF()
-
-IF(ENABLE_FUZZING)
-    MESSAGE("Building Fuzz Tests, using fuzzing sanitizer https://www.llvm.org/docs/LibFuzzer.html")
-    ADD_SUBDIRECTORY(fuzz_test)
 ENDIF()
 
 ADD_SUBDIRECTORY(src)

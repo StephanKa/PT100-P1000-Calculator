@@ -4,7 +4,6 @@ ENDIF()
 
 OPTION(BUILD_SHARED_LIBS "Enable compilation of shared libraries" OFF)
 OPTION(ENABLE_TESTING "Enable Test Builds" ON)
-OPTION(ENABLE_FUZZING "Enable Fuzzing Builds" OFF)
 
 # Very basic PCH example
 OPTION(ENABLE_PCH "Enable Precompiled Headers" OFF)
@@ -26,17 +25,3 @@ OPTION(ENABLE_SANITIZER_LEAK "Enable leak sanitizer" FALSE)
 OPTION(ENABLE_COVERAGE "Enable coverage reporting for gcc/clang" FALSE)
 
 OPTION(ENABLE_IPO "Enable Interprocedural Optimization, aka Link Time Optimization (LTO)" OFF)
-
-# examples
-OPTION(CPP_STARTER_USE_SML "Enable compilation of SML sample" OFF)
-OPTION(CPP_STARTER_USE_BOOST_BEAST "Enable compilation of boost beast sample" OFF)
-OPTION(CPP_STARTER_USE_CROW "Enable compilation of crow sample" OFF)
-OPTION(CPP_STARTER_USE_CPPZMQ_PROTO "Enable compilation of protobuf and cppzmq sample" OFF)
-
-# Note: by default ENABLE_DEVELOPER_MODE is True
-# This means that all analysis (sanitizers, static analysis)
-# is enabled and all warnings are treated as errors
-# if you want to switch this behavior, change TRUE to FALSE
-SET(ENABLE_DEVELOPER_MODE
-    TRUE
-    CACHE BOOL "Enable 'developer mode'")
