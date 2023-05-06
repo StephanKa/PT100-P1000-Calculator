@@ -1,4 +1,4 @@
-# cpp_example_project
+# PT100 & PT1000 compile time calculator
 
 
 ## Build Status
