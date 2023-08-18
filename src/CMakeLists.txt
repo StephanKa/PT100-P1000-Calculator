@@ -6,6 +6,6 @@ TARGET_LINK_LIBRARIES(
         ${NAME}
         PRIVATE project_options
         project_warnings
-        CONAN_PKG::fmt)
+        fmt::fmt)
 
 TARGET_INCLUDE_DIRECTORIES(${NAME} PRIVATE ${CMAKE_BINARY_DIR}/generated ../include)

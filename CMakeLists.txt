@@ -1,4 +1,6 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 3.16...3.23)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.19)
+
+INCLUDE(cmake/Conan.cmake)
 
 # strongly encouraged to enable this globally to avoid conflicts between
 # -Wpedantic being enabled and -std=c++20 and -std=gnu++20 for example
@@ -97,8 +99,8 @@ IF(ENABLE_PCH)
             <utility>)
 ENDIF()
 
-INCLUDE(cmake/Conan.cmake)
-RUN_CONAN()
+FIND_PACKAGE(fmt REQUIRED)
+FIND_PACKAGE(Catch2 REQUIRED)
 
 IF(ENABLE_TESTING)
     ENABLE_TESTING()
