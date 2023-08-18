@@ -64,8 +64,6 @@ namespace details {
         static inline constexpr float B_FACTOR = -0.0000005775F;
     };
 
-    inline constexpr Temperature OFFSET{ 273.15F };
-
     constexpr float sqrt(Base base, float curr, float prev)
     {
         return curr == prev ? curr : sqrt(base, 0.5F * (curr + base() / curr), curr);

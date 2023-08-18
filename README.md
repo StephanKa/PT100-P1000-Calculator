@@ -70,7 +70,10 @@ For example:
 
     cmake --preset test-unixlike-clang-15-debug
 
-
 ## Testing
 
 - See [Catch2 tutorial](https://github.com/catchorg/Catch2/blob/master/docs/tutorial.md)
+
+## Compiler Explorer
+
+[Clang 16.0.0](https://godbolt.org/z/5ToE67of6)
