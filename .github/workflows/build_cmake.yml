@@ -42,7 +42,7 @@ jobs:
                     {name: 'Clang 14', preset: clang-14, pkgs: 'clang-14 llvm-14'},
                     {name: 'Clang 15', preset: clang-15, pkgs: 'clang-15 llvm-15'}
                   ]
-        cxx: [17, 20]
+        cxx: [20]
 
     steps:
     - uses: actions/checkout@v3
