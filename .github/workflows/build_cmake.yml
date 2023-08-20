@@ -63,9 +63,15 @@ jobs:
         python3 -m pip install --upgrade pip setuptools conan
         source ~/.profile
 
+    - name: Install LLVM dependencies
+      if: ${{ startsWith(matrix.compiler.name, 'Clang') }}
+      run:   |
+             sudo apt-get purge --auto-remove llvm python3-lldb-14 llvm-14 # https://github.com/llvm/llvm-project/issues/64182
+             sudo bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
+      shell: bash
+
     - name: Install dependencies
       run:   |
-             sudo bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
              sudo apt update
              sudo apt install ninja-build ${{ matrix.compiler.pkgs }}
       shell: bash
