@@ -18,3 +18,6 @@ CATCH_DISCOVER_TESTS(
         "catch_constexpr."
         OUTPUT_SUFFIX
         .xml)
+
+ADD_CUSTOM_COMMAND(TARGET catch_constexpr_tests POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:catch_constexpr_tests> ${CMAKE_BINARY_DIR}/install/bin/$<TARGET_FILE_NAME:catch_constexpr_tests>)
