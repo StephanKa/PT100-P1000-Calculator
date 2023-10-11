@@ -16,12 +16,12 @@ class NamedType
     constexpr explicit NamedType(T &&value) : m_value(std::move(value))
     {}
 
-    constexpr NamedType &operator=(T value)
+    [[nodiscard]] constexpr NamedType &operator=(T value)
     {
         m_value = value;
         return *this;
     }
-    constexpr T operator()() const
+    [[nodiscard]] constexpr T operator()() const
     {
         return m_value;
     }
@@ -64,23 +64,23 @@ namespace details {
         static inline constexpr float B_FACTOR = -0.0000005775F;
     };
 
-    constexpr float sqrt(Base base, float curr, float prev)
+    [[nodiscard]] constexpr float sqrt(Base base, float curr, float prev)
     {
         return curr == prev ? curr : sqrt(base, 0.5F * (curr + base() / curr), curr);
     }
 
-    constexpr float pow(Base base, int y)
+    [[nodiscard]] constexpr float pow(Base base, int y)
     {
         return y == 0 ? 1.0F : base() * pow(base, y - 1);
     }
 
-    constexpr float sqrt(float x)
+    [[nodiscard]] constexpr float sqrt(float x)
     {
         return x >= 0 && x < std::numeric_limits<float>::infinity() ? sqrt(Base{ x }, x, 0) : std::numeric_limits<float>::quiet_NaN();
     }
 
     template<typename Type>
-    constexpr auto calculateTemperatureImpl(const Ohm value)
+    [[nodiscard]] constexpr auto calculateTemperatureImpl(const Ohm value)
     {
         return Temperature{ (-1 * details::Constants::A_FACTOR * Type::R0
                               + details::sqrt(
@@ -89,13 +89,13 @@ namespace details {
     }
 
     template<typename Type>
-    constexpr auto calculateOhmImpl(const Temperature value)
+    [[nodiscard]] constexpr auto calculateOhmImpl(const Temperature value)
     {
         return Ohm{ Type::R0 * (1 + details::Constants::A_FACTOR * value()) };
     }
 
     template<typename Type, size_t N, InputConcept T>
-    constexpr auto calculateContainerImpl(const std::array<T, N> &inputData)
+    [[nodiscard]] constexpr auto calculateContainerImpl(const std::array<T, N> &inputData)
     {
         static_assert(details::InputConcept<T>, "Type in container not supported!");
 
@@ -143,7 +143,7 @@ struct PT1000
 };
 
 template<typename Type, details::InputConcept Input>
-constexpr auto calculate(Input data)
+[[nodiscard]] constexpr auto calculate(Input data)
 {
     static_assert(details::InputConcept<Input> || details::IsContainer<Input>, "Input not supported!");
 
